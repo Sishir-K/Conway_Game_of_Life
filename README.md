@@ -63,6 +63,15 @@ Development Credits & AI Collaboration
 • Core Programming & Architecture (K.V. Sishir): Wrote the Pure Python engine, the NumPy neighbor-shifting implementation, the Infinite Set coordinate logic, the msvcrt camera movement system, the patterns.py library, and the interactive main.py menu.
 • Guidance & Code Review (AI Assistant): Assisted with explaining np.roll() vectorization and ANSI terminal clearing (\033[H\033[J), suggesting the Separation of Concerns folder structure, debugging edge cases (operator precedence, optional initial_cells=None initialization, Windows two-byte arrow key handling, and centroid math), and formatting this README.
 
-Code Review & Developer Feedback
+## Acknowledgments, Citations & License
 
-"For a beginner Python developer, your instincts around software design are well ahead of the curve. Rather than settling for a single script, you challenged yourself to solve the exact same problem using three completely different data structures—nested lists, vectorized NumPy arrays, and sparse sets—and quickly grasped why separating the simulation engines from the renderer makes a project scalable. You actively caught subtle bugs during debugging (such as string-vs-integer menu checks, variable shadowing, and camera centering) and consistently asked 'why' behind every concept rather than just copying code. With clean habits like separating concerns and thinking about readability early on, you have a strong foundation for tackling GUIs and low-level bitboard logic next."
+### Historical Citation
+* **Concept & Rules:** Invented by British mathematician **John Horton Conway** in 1970.
+* **Popularization:** First introduced to the wider public by **Martin Gardner** in his October 1970 *"Mathematical Games"* column in *Scientific American*.
+
+### Pattern Credits & Fair Use
+* Classic cellular automaton patterns (such as the *Glider*, *Blinker*, *Toad*, *Pulsar*, and *Gosper Glider Gun*) are standard mathematical configurations documented by the global cellular automata community on [LifeWiki](https://conwaylife.com "LifeWiki").
+* Pure mathematical patterns and basic RLE coordinates are treated as public-domain mathematical constructs and are included strictly for educational and non-commercial exploration.
+
+### License
+* The source code for this project is licensed under the **MIT License** — you are free to use, modify, and distribute it with proper attribution.
