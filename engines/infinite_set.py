@@ -2,6 +2,7 @@
 # Python set to store only alive cells => infinite alive
 import random
 class InfiniteSetEngine:
+    bounded = False
     directions = [
         (-1,1),(0,1),(1,1),
         (-1,0),      (1,0),

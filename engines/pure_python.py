@@ -2,6 +2,7 @@
 import random
 
 class PurePythonEngine:
+    bounded = True
     def __init__(self,rows:int,cols:int,initial_cells:set[tuple[int]]):
         self.rows = rows
         self.cols = cols
@@ -20,7 +21,7 @@ class PurePythonEngine:
         new_grid = [[0 for _ in range(self.cols)] for _ in range(self.rows)]
         for r in range(self.rows):
                 for c in range(self.cols):
-                    # Count number of alive neighbours
+                    
                     live_neighbours = 0
                     for d_row in [-1,0,1]:
                         for d_col in [-1,0,1]:
@@ -43,8 +44,8 @@ class PurePythonEngine:
         live = set()
         for row in range(self.rows):
             for col in range(self.cols):
-                if self.grid == 1:
-                    live.add(row,col)
+                if self.grid[row][col] == 1:
+                    live.add((row,col))
         return live
 
 

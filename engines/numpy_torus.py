@@ -5,6 +5,7 @@ import numpy as np
 
 # Making a warpper class for this entire engine called as NumpyEngine
 class NumpyEngine:
+    bounded = True
     def __init__(self,rows:int,cols:int,initial_cells:set[tuple[int]]):
         self.grid = np.zeros((rows,cols),dtype=int)
         for r,c in initial_cells:
