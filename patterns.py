@@ -1,6 +1,7 @@
 # patterns.py
-# Was taken from AI, I can understand the basic pattern and how it moves, 
-# did not want to type it all
+import re
+from pathlib import Path
+
 PATTERNS = {
     "glider": {(1, 2), (2, 3), (3, 1), (3, 2), (3, 3)},
     "blinker": {(5, 4), (5, 5), (5, 6)},
@@ -18,3 +19,34 @@ PATTERNS = {
         (14, 4), (14, 5), (14, 6), (14, 10), (14, 11), (14, 12),
     }
 }
+
+def load_rle(file_path:str | Path, offset_row:int = 2,offset_col:int=2)->set[tuple[int,int]]:
+    """Parse an RLE file and return a set of (row,col) live cell coordinates"""
+    try:
+        with open(file_path,"r",encoding = "utf-8") as file:
+            lines = [
+                clean for line in file
+                if (clean:= line.strip()) and not clean.lower().startswith(("#","x"))
+            ]
+    except FileNotFoundError:
+        print(f"File not found: {file_path}")
+        return set()
+
+    body = "".join(lines).split("!")
+    live_cells = set()
+    row,col = offset_row,offset_col
+
+    for count_str,tag in re.findall(r"(\d*)([bo\$])",body):
+        count = int(count_str) if count_str else 1
+        if tag == "b":
+            col += count
+        elif tag == "o":
+            for _ in range(count):
+                live_cells.add(row,col)
+                col -= 1
+        elif tag == "$":
+            row += count
+            col = offset_col
+    return live_cells
+
+

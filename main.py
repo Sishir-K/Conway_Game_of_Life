@@ -1,7 +1,7 @@
 # MODULES
 import time
 from renderer import Renderer
-from patterns import PATTERNS
+from patterns import PATTERNS,load_rle
 from engines.pure_python import PurePythonEngine
 from engines.numpy_torus import NumpyEngine
 from engines.infinite_set import InfiniteSetEngine
@@ -30,19 +30,28 @@ def choose_pattern()->tuple[bool, set[tuple[int, int]]]:
     """Prompt for a starting pattern. Returns (is_valid, pattern_cells)."""
     print("\nChoose starting state:")
     print("0. Random board")
-    
+
     pattern_names = list(PATTERNS.keys())
     for idx, name in enumerate(pattern_names, start=1):
         print(f"{idx}. {name.capitalize()}")
 
+    rle_option = len(pattern_names) + 1
+    print(f"{rle_option}. Load from RLE file")
+
     p_choice = input("Enter choice: ").strip()
     if p_choice == "0":
         return True,None
-    elif p_choice.isdigit() and 1 <= int(p_choice) <= len(pattern_names):
-        return True,PATTERNS[pattern_names[int(p_choice) - 1]]
-    else:
-        print("Invalid pattern choice")
-        return False,None
+    elif p_choice.isdigit():
+        num = int(p_choice)
+        if 1 <= num <= len(pattern_names):
+            return True, PATTERNS[pattern_names[int(p_choice) - 1]]
+        elif p_choice == rle_option :
+            f_path = input("Enter File path: ").strip().strip('"')
+            cells = load_rle(file_path=f_path)
+            return (True,cells) if cells else (False,None)
+
+    print("Invalid pattern choice")
+    return False,None
     
 def run_simulation(engine, renderer:Renderer):
     """Run the main render-step loop until user stops/interrupts"""
